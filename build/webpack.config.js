@@ -19,5 +19,31 @@ module.exports = {
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
+    },
+    devServer:{
+        contentBase: './dist'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                enforce: 'pre',
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        query: {
+                            presets: ['env', 'react']
+                        }
+                    }, {
+                        loader: 'eslint-loader',
+                        options: {
+                            formatter: require('eslint-friendly-formatter'),
+                            emitWarning: false
+                        }
+                    }
+                ]
+            }
+        ]
     }
 }
