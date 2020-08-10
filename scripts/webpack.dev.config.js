@@ -1,162 +1,62 @@
-'use strict'
+
 const path = require('path')
-const less = require('less')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const webpackConfigBase = require('./webpack.base.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-
-// resolve path
-function resolve (dir) {
-    return path.join(__dirname, '..', dir)
+const { CleanWebpackPlugin }  = require('clean-webpack-plugin')
+const os = require('os')
+let selfIp
+try {
+  // selfIp = os.networkInterfaces()['WLAN'][1].address
+  selfIp = getIpAddress()
+} catch (e) {
+  selfIp = 'localhost'
 }
 
-console.log(path.join('./src/index.js'))
-console.log(path.join('./dist'))
-console.log(path.resolve(__dirname, '../'))
-
-module.exports = {
-    context: path.resolve(__dirname, '../'),
-    // The entry of the Application
-    entry: {
-        main: './src/index.js'
-    },
-    output: {
-        path: path.resolve('dist'),
-        publicPath: '/',
-        filename: 'js/[name]-[hash]' + '.js',
-        chunkFilename: 'js/[name]-[hash]' + 'js'
-    },
-    devServer:{
-        contentBase: false,
-        clientLogLevel: 'warning',
-        publicPath: '/',
-        hot: true,
-        progress: true,
-        overlay: { warning: false, errors:true },
-        historyApiFallback: {
-            rewrites: [
-                { from: /.*/, to: path.posix.join('/', 'index.html') }
-            ]
-        },
-        compress: true,
-        inline: true,
-        port: 8080,
-        host: '127.0.0.1',
-        watchOptions:{
-            poll: false
-        }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                enforce: 'pre',
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        query: {
-                            presets: ['env', 'react']
-                        }
-                    }, {
-                        loader: 'eslint-loader',
-                        options: {
-                            formatter: require('eslint-friendly-formatter'),
-                            emitWarning: false
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.less$/,
-                exclude: /node_modules/,
-                include: /src/,
-                use: ExtractTextWebpackPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                minimize: process.env.NODE_ENV === 'production',
-                                importLoaders: 2,
-                                localIdentName: '[name]-[local]-[hash:base64:5]',
-                                modules:true
-                            }
-                        }, {
-                            loader: 'postcss-loader',
-                            options: {      
-                                plugins: (loader) => [
-                                    require('autoprefixer')(), 
-                                ]
-                            }
-                        },{
-                            loader: 'less-loader',
-                            options: {
-                                javascriptEnabled: true,
-                            }
-                        },
-                    ]
-                })
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
-                exclude: [resolve('src/assets/icons')],
-                options: {
-                  limit: 10000,
-                  name: utils.assetsPath('img/[name].[hash:7].[ext]')
-                }
-              },
-              {
-                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                  limit: 10000,
-                  name: utils.assetsPath('media/[name].[hash:7].[ext]')
-                }
-              },
-              {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                  limit: 10000,
-                  name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-                }
-              }
-        ]
-    },
-    plugins: [
-        new ExtractTextWebpackPlugin({
-            filename: 'css/[name]-[hash].css',
-            allChunks: true
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeAttributeQuotes: true,
-            },
-            filename: 'index.html'
-        }),
-        new CopyWebpackPlugin({
-            from: path.resolve(__dirname, './src/static'),
-            to: 'static',
-            ignore: ['.*']
-        })
-    ],
-    optimization: {
-        runtimeChunks: {
-            name: 'manifest'
-        },
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all'
-                }
-            }
-        }
+const PORT = 8888
+// 精确的获取本机ip地址
+function getIpAddress () {
+  const interfaces = require('os').networkInterfaces
+  for (let devName in interfaces) {
+    const iface = interfaces[devName]
+    for (let i = 0; i < iface.length; i += 1) {
+      let alias = iface[i]
+      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+        return alias.address
+      }
     }
+  }
 }
+
+function resolve(relatedPath) {
+  return path.join(__dirname, relatedPath)
+}
+const webpackConfigDev = {
+  mode: 'development',
+  plugins: [
+    // 定义环境变量为开发环境
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      IS_DEVELOPMETN: true,
+    }),
+    // 将打包后的资源注入到html文件内    
+    new HtmlWebpackPlugin({
+      template: resolve('../app/index.html'),
+      dlls: [],
+    }),
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devtool: 'source-map',
+  devServer: {
+    contentBase: resolve('../app'),
+    historyApiFallback: false,
+    open: true,
+    hot: true, 
+    host: selfIp,
+    port: PORT,
+  },
+}
+
+module.exports = merge(webpackConfigBase, webpackConfigDev)
