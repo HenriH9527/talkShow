@@ -1,96 +1,27 @@
 {
-  "name": "react-admin",
+  "name": "demo",
   "version": "0.1.0",
-  "description": "a react develop stack for pc management system",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/duxianwei520/react"
-  },
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run dev\" \"npm run mock\"",
     "dev": "webpack-dev-server --config ./scripts/webpack.dev.config.js",
-    "testing": "webpack --config ./scripts/webpack.testing.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./scripts/webpack.prod.config.js",
-    "lint": "eslint ./ --cache --fix --ignore-pattern .gitignore",
-    "test": "jest --coverage",
-    "mock": "supervisor -w mock ./app/mocks/http.js",
-    "precommit": "lint-staged",
-    "preCommitInit": "node ./node_modules/husky/lib/installer/bin.js install",
-    "test:report": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "dll": "webpack --config ./scripts/webpack.dll.config.js"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "author": "duxianwei",
-  "contributors": [
-    {
-      "name": "HanQ"
-    },
-    {
-      "name": "Huxiaoyu"
-    },
-    {
-      "name": "jinxedjkldsa"
-    },
-    {
-      "name": "FengYangLiu"
-    }
-  ],
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ],
-    "testEnvironment": "jsdom",
-    "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy",
-      "^@apis(.*)$": "<rootDir>/app/apis$1",
-      "^@configs(.*)$": "<rootDir>/app/configs$1",
-      "^@ajax(.*)$": "<rootDir>/app/configs/ajax.js",
-      "^@config(.*)$": "<rootDir>/app/configs/config.js",
-      "^@reg(.*)$": "<rootDir>/app/configs/regular.config.js",
-      "^@components(.*)$": "<rootDir>/app/components$1",
-      "^@tableList(.*)$": "<rootDir>/app/components/tableList/tableList.js",
-      "^@redux/actions(.*)$": "<rootDir>/app/redux/actions$1",
-      "^@images(.*)$": "<rootDir>/app/images$1"
-    },
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/coverage/**",
-      "!**/scripts/**",
-      "!**/reducers/**",
-      "!**/actions/**",
-      "!**/base/**",
-      "!**/apis/**",
-      "!**/mocks/**",
-      "!**/middleware/**",
-      "!**/components/**",
-      "!**/menu/**",
-      "!**/configs/**",
-      "!**/store.js",
-      "!**/provider.jsx",
-      "!**/example.js",
-      "!**/client.js",
-      "!**/webpack.config.js",
-      "!**/selectRole.js",
-      "!**/setCenter/index.js",
-      "!**/dist/**"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 50,
-        "functions": 50,
-        "lines": 50,
-        "statements": 50
-      }
-    }
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.7.0",
