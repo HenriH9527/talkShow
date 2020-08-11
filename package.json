@@ -1,0 +1,33 @@
+{
+  "name": "talkshow",
+  "version": "0.1.0",
+  "description": "about talk show",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentHyf/talkShow.git"
+  },
+  "author": "Vincent",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VincentHyf/talkShow/issues"
+  },
+  "homepage": "https://github.com/VincentHyf/talkShow#readme",
+  "dependencies": {
+    "antd": "^4.5.3",
+    "axios": "^0.19.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router": "^5.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.1"
+  }
+}
