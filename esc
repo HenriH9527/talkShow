@@ -1,0 +1,121 @@
+[33mcommit 7d29e0e7e75ddb22470290c896f90ea62a2f2c61[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 22:11:31 2020 +0800
+
+    fix: modify the item to public
+
+[33mcommit 5ca2d4e342880d4745d56d568588e3ffb95c4201[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 22:09:58 2020 +0800
+
+    fix: init the all item
+
+[33mcommit 85c2ddb276fbe1a2ae494eaea15e13bccbafcdab[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 21:13:41 2020 +0800
+
+    ADD: init page
+
+[33mcommit ea071ee2b9f054aa4e07dfa3c432384eaf2d37fa[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 21:13:02 2020 +0800
+
+    chore(package.json):  Configuring the development environment
+
+[33mcommit 1f672bbc78d830cac8145137b49a54efdec93372[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 20:54:18 2020 +0800
+
+    ADD(router.config.js): Routing controler
+
+[33mcommit ebfd17b58ef66ecab0af75ce55d2ce7b577b5be2[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 20:47:05 2020 +0800
+
+    ADD(client.js): The entry of item's interview.
+
+[33mcommit 1f24ad353b885001e3c8bf186beaa869d76c73e4[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 20:42:37 2020 +0800
+
+    fix(test.config): modify the configuration.
+
+[33mcommit 3c5a6d0b790a421e274ad729477d442608f95296[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 20:41:13 2020 +0800
+
+    chore: set the development environment
+
+[33mcommit 41fe1a03dc268d941a003ba782c0e3d94316111f[m
+Author: VincentHyf <1004779785.com>
+Date:   Mon Aug 10 20:37:38 2020 +0800
+
+    fix:change file name
+
+[33mcommit 9da5290ace2b82de57f34478b052bf7495125613[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: VincentHyf <1004779785.com>
+Date:   Fri Aug 7 22:12:19 2020 +0800
+
+    chore(package.json): some libraries has been added |  chore(webpack.base.config.js): The basic configuration is implemented
+
+[33mcommit 2026c81dc6d1aa62731f3f2265628d4a2c3f1f95[m
+Author: VincentHyf <1004779785.com>
+Date:   Thu Aug 6 22:31:22 2020 +0800
+
+    chore(package.json): add the dependency |  chore(webpack.config.js): A new configuration item for WebPack has been added
+
+[33mcommit 1c1087c40b2bb690689f9f83e4ce23ffc745b528[m
+Merge: ad915a7 ca050ae
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 22:15:49 2020 +0800
+
+    Merge branch 'feature/container' into develop
+
+[33mcommit ca050ae8f53fc8e20ec0b170a48d6f115a35fb64[m
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 22:15:33 2020 +0800
+
+    chore(babel): babel's config
+
+[33mcommit b7185a5d22c2a206dddaeeb2f2d1304268fc3d60[m
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 22:14:26 2020 +0800
+
+    chore(webpack): new roles have been added
+
+[33mcommit 76c03663ca00e225264df54fc6424ec208348481[m
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 22:12:58 2020 +0800
+
+    chore(package.json):  Add dependency packages for development and production environments
+
+[33mcommit ad915a75676f200c0d6c6a1f3885c6907c393f65[m
+Merge: c69bc35 25ac3e1
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 21:44:09 2020 +0800
+
+    Merge branch 'feature/container' into develop
+
+[33mcommit 25ac3e1ce8a116aaf57b00fa3d1f4ec2e40f9a3d[m
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 21:43:39 2020 +0800
+
+    chore(webpack): add WebPack configuration
+
+[33mcommit b56c36dcd51460d0156937e7856df5436efa1183[m
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 21:41:49 2020 +0800
+
+    chore(gitignore): add new roles
+
+[33mcommit c69bc35833e6e6477b7fbfc5ea0fcccaaceffefa[m
+Author: VincentHyf <1004779785.com>
+Date:   Wed Aug 5 20:49:13 2020 +0800
+
+    chore(package.json): init the application
+
+[33mcommit 6218fe040fa42e627286e37896d4dce9f7dd2a47[m
+Author: Ash huang <33093191+VincentHyf@users.noreply.github.com>
+Date:   Wed Aug 5 20:26:02 2020 +0800
+
+    Initial commit
