@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+#json
+package-lock.json
+
 # vscode
 jsconfig.json
 dist
