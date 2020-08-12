@@ -2,6 +2,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const os = require('os')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 
 function resolve(relatedPath) {
@@ -17,10 +18,26 @@ const webpackConfigBase = {
         filename: devMode ?'js/[name].[hash].js' : 'js/[name].[contenthash].js',
         chunkFilename: devMode ? 'chunks/[name].[hash:4].js':'chunks/[name].[contenthash].js'
     },
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        // 将打包后的资源注入到html文件内    
+        new HtmlWebpackPlugin({
+            template: resolve('../app/index.html'),
+            dlls: []
+        })
+    ],
+    devServer: {
+        contentBase: resolve('../app'),
+        hot: true,
+        open: true
+    },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 use: [
                     {
                         loader: 'babel-loader',
@@ -32,7 +49,6 @@ const webpackConfigBase = {
                         }
                     }
                 ],
-                include: path.resolve(__dirname, 'app'),
                 exclude: /node_modules/
             },
             {
