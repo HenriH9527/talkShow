@@ -11,74 +11,24 @@ function resolve(relatedPath) {
 
 const webpackConfigBase = {
     entry: {
-        client: resolve('../app/index.js')
+        index: resolve('../src/index.js'),
+        framework: ['react', 'react-dom']
     },
     output: {
-        path: resolve('../dist'),
-        filename: devMode ?'js/[name].[hash].js' : 'js/[name].[contenthash].js',
-        chunkFilename: devMode ? 'chunks/[name].[hash:4].js':'chunks/[name].[contenthash].js'
+        filename: 'js/bundle.js',
+        path: resolve('../dist')
     },
     resolve: {
         extensions: ['*', '.js', '.jsx']
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        // 将打包后的资源注入到html文件内    
-        new HtmlWebpackPlugin({
-            template: resolve('../app/index.html'),
-            dlls: []
-        })
-    ],
-    devServer: {
-        contentBase: resolve('../app'),
-        hot: true,
-        open: true
-    },
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env', '@babel/react'],
-                            plugins: [
-                                ['@babel/plugin-proposal-decorators', { 'legacy': true }]
-                            ]
-                        }
-                    }
-                ],
-                exclude: /node_modules/
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                exclude: /node_modules/,
-                include: [resolve('../app/images')],
-                loader: 'url-loader',
-                options: {
-                  limit: 8192,
-                  name: '[name].[hash:4].[ext]',
-                  outputPath: '/img'
-                }
-            },
-            {
-                test: /\.(woff|eot|ttf|svg|gif)$/,
-                loader: 'url-loader',
-                options: {
-                  limit: 8192,
-                  name: 'font/[name].[hash:4].[ext]'
-                }
-            },
-            {
-                test: /\.(css|less)$/,
-                use: [
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader'
-                ]
+              test: /\.(js|jsx)$/,
+              use: 'babel-loader',
+              exclude: /node_modules/,
             }
-        ]
+          ]
     }
 }
 

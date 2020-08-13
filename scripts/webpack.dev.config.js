@@ -1,8 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
-const { merge } = require('webpack-merge')
 const os = require('os')
-const webpackConfigBase = require('./webpack.base.config')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 let selfIP
 
@@ -27,15 +26,27 @@ function getIpAddress () {
     }
 }
 
-const webpackConfigDev = {
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ],
+const webpackDevConfig = {
+    mode: 'development',
+    output: {
+      filename: 'js/[name].[hash:8].bundle.js'
+    },
     devServer: {
-        contentBase: './dist',
-        hot: true
-    }
+      contentBase: path.resolve(__dirname, '../dist'),
+      open: true,
+      port: PORT,
+      compress: true,
+      hot: true
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+          template: 'public/index.html',
+          inject: 'body',
+          hash: false
+        }),
+        new webpack.HotModuleReplacementPlugin()
+    ]
 }
 
 
-module.exports = merge(webpackConfigBase, webpackConfigDev)
+module.exports = webpackDevConfig
