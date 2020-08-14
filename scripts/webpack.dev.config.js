@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const os = require('os')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
 let selfIP
 
 try {
@@ -26,8 +28,16 @@ function getIpAddress () {
     }
 }
 
+function resolve(relatedPath) {
+  return path.join(__dirname, relatedPath)
+}
+
 const webpackDevConfig = {
     mode: 'development',
+    entry: {
+      index: resolve('../src/index.js'),
+      framework: ['react', 'react-dom']
+    },
     output: {
       filename: 'js/[name].[hash:8].bundle.js'
     },
@@ -38,13 +48,26 @@ const webpackDevConfig = {
       compress: true,
       hot: true
     },
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          use: 'babel-loader',
+          exclude: /node_modules/,
+        }
+      ]
+    },
     plugins: [
-        new HtmlWebpackPlugin({
-          template: 'public/index.html',
-          inject: 'body',
-          hash: false
-        }),
-        new webpack.HotModuleReplacementPlugin()
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'public/index.html',
+        inject: 'body',
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true
+        }
+      }),
+      new CleanWebpackPlugin()
     ]
 }
 
