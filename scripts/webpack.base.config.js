@@ -2,7 +2,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const os = require('os')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 
 function resolve(relatedPath) {
@@ -24,11 +24,18 @@ const webpackConfigBase = {
     module: {
         rules: [
             {
-              test: /\.(js|jsx)$/,
-              use: 'babel-loader',
-              exclude: /node_modules/,
+                test: /\.(js|jsx)$/,
+                use: 'babel-loader',
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
             }
-          ]
+        ]
     }
 }
 
