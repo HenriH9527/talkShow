@@ -11,7 +11,7 @@ function resolve(relatedPath) {
 
 const webpackConfigBase = {
     entry: {
-        index: resolve('../src/index.js'),
+        index: './src/index.js',
         framework: ['react', 'react-dom']
     },
     output: {

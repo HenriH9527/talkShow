@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = mergeUtils.merge(webpackBaseConfig, {
+module.exports = mergeUtils.merge(webpackConfigBase, {
     mode: 'production',
     output: {
         filename: 'js/[name].[hash:8].bundle.js'
